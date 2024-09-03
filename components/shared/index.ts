@@ -1,9 +1,12 @@
-export { Container } from './Container';
 export { Header } from './Header';
-export { Title } from './Title';
-export { Categories } from './Categories';
+export { Container } from './Container';
 export { SortPopup } from './sort-popup';
 export { TopBar } from './top-bar';
 export { FilterCheckbox } from './filter-checkbox';
+export { CheckboxFiltersGroup } from './checkbox-filters-group';
 export { Filters } from './filters';
+export { Title } from './Title';
 export { RangeSlider } from './range-slider';
+export { ProductsGroupList } from './products-group-list';
+export { ProductCard } from './product-card';
+export { Categories } from './Categories';
