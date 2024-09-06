@@ -1,7 +1,25 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import { prisma } from './prisma-client';
 import { hashSync } from 'bcrypt';
-import { categories, ingredients } from './constants';
+import { categories, ingredients, products } from './constants';
+
+const randomNumber = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
+};
+
+const generateProductVariant = ({
+  productId,
+  size,
+}: {
+  productId: number;
+  size?: 1 | 2 | 3;
+}) => {
+  return {
+    productId,
+    price: randomNumber(150, 650),
+    size,
+  } as Prisma.ProductVariantUncheckedCreateInput;
+};
 
 // generate data
 async function up() {
@@ -28,14 +46,107 @@ async function up() {
     data: categories,
   });
 
-  await prisma.category.createMany({
+  await prisma.ingredient.createMany({
     data: ingredients,
+  });
+
+  await prisma.product.createMany({
+    data: products,
+  });
+
+  const cheeseburger = await prisma.product.create({
+    data: {
+      name: 'Чизбургер',
+      imageUrl: '/burgers/cheeseburger.webp',
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(0, 5),
+      },
+    },
+  });
+
+  const fishburger = await prisma.product.create({
+    data: {
+      name: 'Фишбургер',
+      imageUrl: '/burgers/fishburger.webp',
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(0, 5),
+      },
+    },
+  });
+
+  const bighit = await prisma.product.create({
+    data: {
+      name: 'Биг Хит',
+      imageUrl: '/burgers/big_hit.webp',
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(4, 10),
+      },
+    },
+  });
+
+  const bigspecial = await prisma.product.create({
+    data: {
+      name: 'Биг Спешиал',
+      imageUrl: '/burgers/big_special.webp',
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(4, 10),
+      },
+    },
+  });
+
+  const grand = await prisma.product.create({
+    data: {
+      name: 'Гранд',
+      imageUrl: '/burgers/garnd.webp',
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(4, 10),
+      },
+    },
+  });
+
+  await prisma.productVariant.createMany({
+    data: [
+      // Cheeseburger
+      generateProductVariant({
+        productId: cheeseburger.id,
+        size: 2,
+      }),
+      // Fishburger
+      generateProductVariant({
+        productId: fishburger.id,
+        size: 2,
+      }),
+      // Big Hit
+      generateProductVariant({
+        productId: bighit.id,
+        size: 2,
+      }),
+      // Big Special
+      generateProductVariant({
+        productId: bigspecial.id,
+        size: 2,
+      }),
+      // Grand
+      generateProductVariant({
+        productId: grand.id,
+        size: 2,
+      }),
+    ],
   });
 }
 
 // clear data
 async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "ProductVariant" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`;
 }
 
 async function main() {
