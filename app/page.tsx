@@ -5,8 +5,20 @@ import {
   Title,
   TopBar,
 } from '@/components/shared';
+import { prisma } from '@/prisma/prisma-client';
 
-export default function Home() {
+export default async function Home() {
+  const categories = await prisma.category.findMany({
+    include: {
+      products: {
+        include: {
+          ingredients: true,
+          variants: true,
+        },
+      },
+    },
+  });
+
   return (
     <>
       <Container className="mt-10">
