@@ -114,27 +114,55 @@ async function up() {
       // Cheeseburger
       generateProductVariant({
         productId: cheeseburger.id,
+        size: 1,
+      }),
+      generateProductVariant({
+        productId: cheeseburger.id,
         size: 2,
+      }),
+      generateProductVariant({
+        productId: cheeseburger.id,
+        size: 3,
       }),
       // Fishburger
       generateProductVariant({
         productId: fishburger.id,
         size: 2,
       }),
+      generateProductVariant({
+        productId: fishburger.id,
+        size: 3,
+      }),
       // Big Hit
       generateProductVariant({
         productId: bighit.id,
         size: 2,
       }),
+      generateProductVariant({
+        productId: bighit.id,
+        size: 3,
+      }),
       // Big Special
       generateProductVariant({
         productId: bigspecial.id,
+        size: 1,
+      }),
+      generateProductVariant({
+        productId: bigspecial.id,
         size: 2,
+      }),
+      generateProductVariant({
+        productId: bigspecial.id,
+        size: 3,
       }),
       // Grand
       generateProductVariant({
         productId: grand.id,
         size: 2,
+      }),
+      generateProductVariant({
+        productId: grand.id,
+        size: 3,
       }),
     ],
   });
