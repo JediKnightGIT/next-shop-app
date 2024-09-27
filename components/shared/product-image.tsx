@@ -3,19 +3,19 @@ import React from 'react';
 
 interface Props {
   className?: string;
-  imageUrl: string;
+  imageUrls: string[];
   size: number;
 }
 
 export const ProductImage: React.FC<Props> = ({
-  imageUrl,
+  imageUrls,
   size,
   className,
 }) => {
   return (
     <div className={className}>
       <img
-        src={imageUrl}
+        src={imageUrls.length >= 1 ? imageUrls[size - 1] : imageUrls[0]}
         alt=""
         className={cn(
           'relative left-2 top-2 transition-all z-10 duration-300',

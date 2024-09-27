@@ -57,7 +57,10 @@ async function up() {
   const cheeseburger = await prisma.product.create({
     data: {
       name: 'Чизбургер',
-      imageUrl: '/burgers/cheeseburger.webp',
+      imageUrls: [
+        '/burgers/cheeseburger.webp',
+        '/burgers/double_cheeseburger.webp',
+      ],
       categoryId: 1,
       ingredients: {
         connect: ingredients.slice(0, 5),
@@ -68,7 +71,10 @@ async function up() {
   const fishburger = await prisma.product.create({
     data: {
       name: 'Фишбургер',
-      imageUrl: '/burgers/fishburger.webp',
+      imageUrls: [
+        '/burgers/fishburger.webp',
+        '/burgers/double_fishburger.webp',
+      ],
       categoryId: 1,
       ingredients: {
         connect: ingredients.slice(0, 5),
@@ -79,7 +85,7 @@ async function up() {
   const bighit = await prisma.product.create({
     data: {
       name: 'Биг Хит',
-      imageUrl: '/burgers/big_hit.webp',
+      imageUrls: ['/burgers/big_hit.webp', '/burgers/double_big_hit.webp'],
       categoryId: 1,
       ingredients: {
         connect: ingredients.slice(4, 10),
@@ -90,7 +96,11 @@ async function up() {
   const bigspecial = await prisma.product.create({
     data: {
       name: 'Биг Спешиал',
-      imageUrl: '/burgers/big_special.webp',
+      imageUrls: [
+        '/burgers/junior_big_special.webp',
+        '/burgers/big_special.webp',
+        '/burgers/double_big_special.webp',
+      ],
       categoryId: 1,
       ingredients: {
         connect: ingredients.slice(4, 10),
@@ -101,7 +111,7 @@ async function up() {
   const grand = await prisma.product.create({
     data: {
       name: 'Гранд',
-      imageUrl: '/burgers/grand.webp',
+      imageUrls: ['/burgers/grand.webp', '/burgers/double_grand.webp'],
       categoryId: 1,
       ingredients: {
         connect: ingredients.slice(4, 10),
@@ -120,18 +130,14 @@ async function up() {
         productId: cheeseburger.id,
         size: 2,
       }),
-      generateProductVariant({
-        productId: cheeseburger.id,
-        size: 3,
-      }),
       // Fishburger
       generateProductVariant({
         productId: fishburger.id,
-        size: 2,
+        size: 1,
       }),
       generateProductVariant({
         productId: fishburger.id,
-        size: 3,
+        size: 2,
       }),
       // Big Hit
       generateProductVariant({
