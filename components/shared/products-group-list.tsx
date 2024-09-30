@@ -45,7 +45,7 @@ export const ProductsGroupList: React.FC<Props> = ({
             key={item.id}
             id={item.id}
             name={item.name}
-            imageUrl={item.imageUrl}
+            imageUrls={item.imageUrls}
             price={item.price}
             count={i % 2}
           />

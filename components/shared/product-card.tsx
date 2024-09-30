@@ -9,7 +9,7 @@ interface Props {
   name: string;
   price: number;
   count?: number;
-  imageUrl: string;
+  imageUrls: string[];
   className?: string;
 }
 
@@ -18,7 +18,7 @@ export const ProductCard: React.FC<Props> = ({
   name,
   price,
   count,
-  imageUrl,
+  imageUrls,
   className,
 }) => {
   return (
@@ -29,7 +29,7 @@ export const ProductCard: React.FC<Props> = ({
             width={215}
             height={215}
             className="object-contain"
-            src={imageUrl}
+            src={imageUrls.length >= 3 ? imageUrls[1] : imageUrls[0]}
             alt={name}
           />
         </div>
