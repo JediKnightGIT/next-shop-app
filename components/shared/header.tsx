@@ -18,12 +18,7 @@ export const Header: React.FC<Props> = ({ className }) => {
         {/* left part */}
         <Link href="/">
           <div className="flex items-center gap-4">
-            <Image
-              src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
-              alt="logo"
-              width={35}
-              height={35}
-            />
+            <Image src="/logo.png" alt="logo" width={35} height={35} />
             <div>
               <h1 className="text-2xl uppercase font-black">Next Shop</h1>
               <p className="text-sm">вкусно без точки</p>

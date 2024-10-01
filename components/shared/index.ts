@@ -11,3 +11,6 @@ export { ProductsGroupList } from './products-group-list';
 export { ProductCard } from './product-card';
 export { Categories } from './categories';
 export { SearchInput } from './search-input';
+export { PickProductForm } from './pick-product-form';
+
+export * from './modals';
