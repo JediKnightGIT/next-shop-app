@@ -1,19 +1,21 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
-import { Product } from '@prisma/client';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/shared/components/ui/dialog';
 import { useRouter } from 'next/navigation';
 import { PickProductForm } from '../pick-product-form';
+import { ProductWithRelations } from '@/@types/prisma';
+import { PickBurgerForm } from '../pick-burger-form';
 
 interface Props {
-  product: Product;
+  product: ProductWithRelations;
   className?: string;
 }
 
 export const PickProductModal: React.FC<Props> = ({ product, className }) => {
   const router = useRouter();
+  const isBurgerForm = Boolean(product.imageUrls.length > 1);
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -23,11 +25,15 @@ export const PickProductModal: React.FC<Props> = ({ product, className }) => {
           className,
         )}
       >
-        <PickProductForm
-          imageUrls={product.imageUrls}
-          name={product.name}
-          ingredients={[]}
-        />
+        {isBurgerForm ? (
+          <PickBurgerForm
+            imageUrls={product.imageUrls}
+            name={product.name}
+            ingredients={[]}
+          />
+        ) : (
+          <PickProductForm imageUrls={product.imageUrls} name={product.name} />
+        )}
       </DialogContent>
     </Dialog>
   );

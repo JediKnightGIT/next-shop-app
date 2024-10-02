@@ -1,21 +1,19 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
-import { ProductImage } from './product-image';
+import { BurgerImage } from './burger-image';
 import { Title } from './title';
 import { Button } from '../ui';
 
 interface Props {
   imageUrls: string[];
   name: string;
-  ingredients: any;
-  items?: any[];
+  ingredients?: string[];
   onAddClick?: VoidFunction;
   className?: string;
 }
 
-export const PickProductForm: React.FC<Props> = ({
+export const PickBurgerForm: React.FC<Props> = ({
   name,
-  items,
   imageUrls,
   ingredients,
   onAddClick,
@@ -23,20 +21,11 @@ export const PickProductForm: React.FC<Props> = ({
 }) => {
   const textDetails = 'lorem ipsum dolores';
   const totalPrice = '333';
+  const size = 2;
 
   return (
     <div className={cn('flex flex-1', className)}>
-      <div
-        className={cn(
-          'flex items-center justify-center flex-1 relative w-full',
-        )}
-      >
-        <img
-          src={imageUrls[0]}
-          className="relative left-2 top-2 transition-all z-10 duration-300 size-[350px] object-cover"
-          alt={name}
-        />
-      </div>
+      <BurgerImage imageUrls={imageUrls} size={size} />
 
       <div className="w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />

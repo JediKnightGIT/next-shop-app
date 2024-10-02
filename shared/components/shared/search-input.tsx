@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import { API } from '@/services/api-client';
 import { Product } from '@prisma/client';
 import { Search } from 'lucide-react';
@@ -76,7 +76,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                 className="flex items-center gap-3 px-3 py-2 hover:bg-primary/10"
               >
                 <img
-                  src={product.imageUrl}
+                  src={product.imageUrls[0]}
                   alt={product.name}
                   className="rounded-sm size-8"
                 />

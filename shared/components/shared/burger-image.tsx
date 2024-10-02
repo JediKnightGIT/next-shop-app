@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   size: 1 | 2 | 3;
 }
 
-export const ProductImage: React.FC<Props> = ({
+export const BurgerImage: React.FC<Props> = ({
   imageUrls,
   size,
   className,
@@ -25,9 +25,9 @@ export const ProductImage: React.FC<Props> = ({
         className={cn(
           'relative left-2 top-2 transition-all z-10 duration-300',
           {
-            'size-[200px]': size === 1,
-            'size-[300px]': size === 2,
-            'size-[400px]': size === 3,
+            'size-[350px]': size === 1,
+            'size-[400px]': size === 2,
+            'size-[450px]': size === 3,
           },
         )}
       />
