@@ -3,6 +3,8 @@ import React from 'react';
 import { BurgerImage } from './burger-image';
 import { Title } from './title';
 import { Button } from '../ui';
+import { VariantsGroup } from './variants-group';
+import { burgerSizes } from '@/shared/constants/burger';
 
 interface Props {
   imageUrls: string[];
@@ -31,6 +33,8 @@ export const PickBurgerForm: React.FC<Props> = ({
         <Title text={name} size="md" className="font-extrabold mb-1" />
 
         <p className="text-gray-400">{textDetails}</p>
+
+        <VariantsGroup items={burgerSizes} />
 
         <Button className="h-[55px] px-10 texb-base rounded-[18px] w-full mt-10">
           Добавить в корзину за {totalPrice} ₽
