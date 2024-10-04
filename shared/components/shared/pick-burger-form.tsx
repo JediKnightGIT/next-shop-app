@@ -4,12 +4,15 @@ import { BurgerImage } from './burger-image';
 import { Title } from './title';
 import { Button } from '../ui';
 import { VariantsGroup } from './variants-group';
-import { burgerSizes } from '@/shared/constants/burger';
+import { BurgerSize, burgerSizes } from '@/shared/constants/burger';
+import { Ingredient } from '@prisma/client';
+import { IngredientItem } from './ingredient-item';
 
 interface Props {
   imageUrls: string[];
   name: string;
-  ingredients?: string[];
+  ingredients: Ingredient[];
+  items?: any[];
   onAddClick?: VoidFunction;
   className?: string;
 }
@@ -21,9 +24,10 @@ export const PickBurgerForm: React.FC<Props> = ({
   onAddClick,
   className,
 }) => {
+  const [size, setSize] = React.useState<BurgerSize>(1);
+
   const textDetails = 'lorem ipsum dolores';
   const totalPrice = '333';
-  const size = 2;
 
   return (
     <div className={cn('flex flex-1', className)}>
@@ -34,7 +38,24 @@ export const PickBurgerForm: React.FC<Props> = ({
 
         <p className="text-gray-400">{textDetails}</p>
 
-        <VariantsGroup items={burgerSizes} />
+        <VariantsGroup
+          items={burgerSizes.slice(0, imageUrls.length)}
+          value={String(size)}
+          onClick={(value) => setSize(Number(value) as BurgerSize)}
+          className="mt-5"
+        />
+
+        <div className="grid gird-cols-3 gap-3">
+          {ingredients.map((ingredient) => (
+            <IngredientItem
+              key={ingredient.id}
+              name={ingredient.name}
+              price={ingredient.price}
+              imageUrl={ingredient.imageUrl}
+              onClick={onAddClick}
+            />
+          ))}
+        </div>
 
         <Button className="h-[55px] px-10 texb-base rounded-[18px] w-full mt-10">
           Добавить в корзину за {totalPrice} ₽

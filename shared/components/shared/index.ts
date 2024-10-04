@@ -12,5 +12,6 @@ export { ProductCard } from './product-card';
 export { Categories } from './categories';
 export { SearchInput } from './search-input';
 export { PickProductForm } from './pick-product-form';
+export { IngredientItem } from './ingredient-item';
 
 export * from './modals';

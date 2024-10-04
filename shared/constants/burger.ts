@@ -4,7 +4,9 @@ export const mapSize = {
   3: 'Большой',
 } as const;
 
-export const burgerSizes = Object.entries(mapSize).map(([name, value]) => ({
+export const burgerSizes = Object.entries(mapSize).map(([value, name]) => ({
   name,
   value,
 }));
+
+export type BurgerSize = keyof typeof mapSize;
