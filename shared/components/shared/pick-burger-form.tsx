@@ -5,29 +5,37 @@ import { Title } from './title';
 import { Button } from '../ui';
 import { VariantsGroup } from './variants-group';
 import { BurgerSize, burgerSizes } from '@/shared/constants/burger';
-import { Ingredient } from '@prisma/client';
+import { Ingredient, ProductVariant } from '@prisma/client';
 import { IngredientItem } from './ingredient-item';
+import { useSet } from 'react-use';
 
 interface Props {
   imageUrls: string[];
   name: string;
   ingredients: Ingredient[];
-  items?: any[];
-  onAddClick?: VoidFunction;
+  items: ProductVariant[];
+  onAddToCartClick?: VoidFunction;
   className?: string;
 }
 
 export const PickBurgerForm: React.FC<Props> = ({
   name,
+  items,
   imageUrls,
   ingredients,
-  onAddClick,
+  onAddToCartClick,
   className,
 }) => {
   const [size, setSize] = React.useState<BurgerSize>(1);
 
+  const [selectedIngredients, { toggle: addIngredient }] = useSet(
+    new Set<number>([]),
+  );
+
   const textDetails = 'lorem ipsum dolores';
   const totalPrice = '333';
+
+  console.log(items);
 
   return (
     <div className={cn('flex flex-1', className)}>
@@ -45,16 +53,19 @@ export const PickBurgerForm: React.FC<Props> = ({
           className="mt-5"
         />
 
-        <div className="grid gird-cols-3 gap-3">
-          {ingredients.map((ingredient) => (
-            <IngredientItem
-              key={ingredient.id}
-              name={ingredient.name}
-              price={ingredient.price}
-              imageUrl={ingredient.imageUrl}
-              onClick={onAddClick}
-            />
-          ))}
+        <div className="bg-gray-50 p-5 rounded-md h-[320px] overflow-auto scrollbar mt-5">
+          <div className="grid grid-cols-3 gap-3">
+            {ingredients.map((ingredient) => (
+              <IngredientItem
+                key={ingredient.id}
+                name={ingredient.name}
+                price={ingredient.price}
+                imageUrl={ingredient.imageUrl}
+                onClick={() => addIngredient(ingredient.id)}
+                active={selectedIngredients.has(ingredient.id)}
+              />
+            ))}
+          </div>
         </div>
 
         <Button className="h-[55px] px-10 texb-base rounded-[18px] w-full mt-10">

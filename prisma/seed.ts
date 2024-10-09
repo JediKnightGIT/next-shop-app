@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { prisma } from './prisma-client';
 import { hashSync } from 'bcrypt';
 import { categories, ingredients, products } from './constants';
@@ -63,7 +63,9 @@ async function up() {
       ],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(0, 5),
+        connect: ingredients
+          .slice(3, 6)
+          .concat(ingredients[7], ingredients[10]),
       },
     },
   });
@@ -77,7 +79,7 @@ async function up() {
       ],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(0, 5),
+        connect: ingredients.slice(3, 5).concat(ingredients[11]),
       },
     },
   });
@@ -88,7 +90,7 @@ async function up() {
       imageUrls: ['/burgers/big_hit.webp', '/burgers/double_big_hit.webp'],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(4, 10),
+        connect: ingredients.slice(1, 7),
       },
     },
   });
@@ -103,7 +105,7 @@ async function up() {
       ],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(4, 10),
+        connect: ingredients.slice(1, 6).concat(ingredients[9]),
       },
     },
   });
@@ -114,7 +116,7 @@ async function up() {
       imageUrls: ['/burgers/grand.webp', '/burgers/double_grand.webp'],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(4, 10),
+        connect: ingredients.slice(3, 8).concat(ingredients[10]),
       },
     },
   });
