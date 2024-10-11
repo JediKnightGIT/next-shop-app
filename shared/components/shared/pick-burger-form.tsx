@@ -8,6 +8,7 @@ import { BurgerSize, burgerSizes } from '@/shared/constants/burger';
 import { Ingredient, ProductVariant } from '@prisma/client';
 import { IngredientItem } from './ingredient-item';
 import { useSet } from 'react-use';
+import { calcTotalBurgerPrice } from '@/shared/lib';
 
 interface Props {
   imageUrls: string[];
@@ -32,10 +33,17 @@ export const PickBurgerForm: React.FC<Props> = ({
     new Set<number>([]),
   );
 
-  const textDetails = 'lorem ipsum dolores';
-  const totalPrice = '333';
+  const totalPrice = calcTotalBurgerPrice(
+    size,
+    items,
+    ingredients,
+    selectedIngredients,
+  );
 
-  console.log(items);
+  const handleAddClick = () => {
+    onAddToCartClick?.();
+    console.log({ size, ingredients: selectedIngredients });
+  };
 
   return (
     <div className={cn('flex flex-1', className)}>
@@ -43,8 +51,6 @@ export const PickBurgerForm: React.FC<Props> = ({
 
       <div className="w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
-
-        <p className="text-gray-400">{textDetails}</p>
 
         <VariantsGroup
           items={burgerSizes.slice(0, imageUrls.length)}
@@ -68,7 +74,10 @@ export const PickBurgerForm: React.FC<Props> = ({
           </div>
         </div>
 
-        <Button className="h-[55px] px-10 texb-base rounded-[18px] w-full mt-10">
+        <Button
+          onClick={handleAddClick}
+          className="h-[55px] px-10 texb-base rounded-[18px] w-full mt-10"
+        >
           Добавить в корзину за {totalPrice} ₽
         </Button>
       </div>

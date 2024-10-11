@@ -13,5 +13,6 @@ export { Categories } from './categories';
 export { SearchInput } from './search-input';
 export { PickProductForm } from './pick-product-form';
 export { IngredientItem } from './ingredient-item';
+export { CartButton } from './cart-button';
 
 export * from './modals';

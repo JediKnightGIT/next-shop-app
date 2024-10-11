@@ -42,7 +42,7 @@ export const ingredients = [
   },
   {
     name: 'Соль с Перцем',
-    price: 89,
+    price: 10,
     imageUrl: '/ingredients/salt_pepper.png',
   },
   {
@@ -79,6 +79,11 @@ export const ingredients = [
     name: 'Рыбная котлета',
     price: 110,
     imageUrl: '/ingredients/fish_patty.png',
+  },
+  {
+    name: 'Говяжья котлета',
+    price: 110,
+    imageUrl: '/ingredients/patty.png',
   },
 ].map((obj, index) => ({ ...obj, id: index + 1 }));
 

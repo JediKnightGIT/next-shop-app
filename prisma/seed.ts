@@ -10,14 +10,16 @@ const randomNumber = (min: number, max: number) => {
 const generateProductVariant = ({
   productId,
   size,
+  price,
 }: {
   productId: number;
   size?: 1 | 2 | 3;
+  price?: number;
 }) => {
   return {
     productId,
-    price: randomNumber(150, 650),
     size,
+    price,
   } as Prisma.ProductVariantUncheckedCreateInput;
 };
 
@@ -65,7 +67,7 @@ async function up() {
       ingredients: {
         connect: ingredients
           .slice(3, 6)
-          .concat(ingredients[7], ingredients[10]),
+          .concat(ingredients[7], ingredients[10], ingredients[12]),
       },
     },
   });
@@ -90,7 +92,7 @@ async function up() {
       imageUrls: ['/burgers/big_hit.webp', '/burgers/double_big_hit.webp'],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(1, 7),
+        connect: ingredients.slice(1, 7).concat(ingredients[12]),
       },
     },
   });
@@ -105,7 +107,9 @@ async function up() {
       ],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(1, 6).concat(ingredients[9]),
+        connect: ingredients
+          .slice(1, 6)
+          .concat(ingredients[9], ingredients[12]),
       },
     },
   });
@@ -116,7 +120,9 @@ async function up() {
       imageUrls: ['/burgers/grand.webp', '/burgers/double_grand.webp'],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(3, 8).concat(ingredients[10]),
+        connect: ingredients
+          .slice(3, 8)
+          .concat(ingredients[10], ingredients[12]),
       },
     },
   });
@@ -127,51 +133,101 @@ async function up() {
       generateProductVariant({
         productId: cheeseburger.id,
         size: 1,
+        price: 78,
       }),
       generateProductVariant({
         productId: cheeseburger.id,
         size: 2,
+        price: 160,
       }),
       // Fishburger
       generateProductVariant({
         productId: fishburger.id,
         size: 1,
+        price: 204,
       }),
       generateProductVariant({
         productId: fishburger.id,
         size: 2,
+        price: 259,
       }),
       // Big Hit
       generateProductVariant({
         productId: bighit.id,
-        size: 2,
+        size: 1,
+        price: 186,
       }),
       generateProductVariant({
         productId: bighit.id,
-        size: 3,
+        size: 2,
+        price: 248,
       }),
       // Big Special
       generateProductVariant({
         productId: bigspecial.id,
         size: 1,
+        price: 259,
       }),
       generateProductVariant({
         productId: bigspecial.id,
         size: 2,
+        price: 299,
       }),
       generateProductVariant({
         productId: bigspecial.id,
         size: 3,
+        price: 397,
       }),
       // Grand
       generateProductVariant({
         productId: grand.id,
-        size: 2,
+        size: 1,
+        price: 193,
       }),
       generateProductVariant({
         productId: grand.id,
-        size: 3,
+        size: 2,
+        price: 285,
       }),
+
+      // Остальные продукты
+      generateProductVariant({ productId: 1, price: 289 }),
+      generateProductVariant({ productId: 2, price: 183 }),
+      generateProductVariant({ productId: 3, price: 275 }),
+      generateProductVariant({ productId: 4, price: 272 }),
+      generateProductVariant({ productId: 5, price: 219 }),
+      generateProductVariant({ productId: 6, price: 65 }),
+      generateProductVariant({ productId: 7, price: 62 }),
+      generateProductVariant({ productId: 8, price: 190 }),
+      generateProductVariant({ productId: 9, price: 252 }),
+      generateProductVariant({ productId: 10, price: 230 }),
+      generateProductVariant({ productId: 11, price: 119 }),
+      generateProductVariant({ productId: 12, price: 139 }),
+      generateProductVariant({ productId: 13, price: 139 }),
+      generateProductVariant({ productId: 14, price: 106 }),
+      generateProductVariant({ productId: 15, price: 135 }),
+      generateProductVariant({ productId: 16, price: 159 }),
+      generateProductVariant({ productId: 17, price: 175 }),
+      generateProductVariant({ productId: 18, price: 75 }),
+      generateProductVariant({ productId: 19, price: 185 }),
+      generateProductVariant({ productId: 20, price: 185 }),
+      generateProductVariant({ productId: 21, price: 185 }),
+      generateProductVariant({ productId: 22, price: 179 }),
+      generateProductVariant({ productId: 23, price: 185 }),
+      generateProductVariant({ productId: 24, price: 39 }),
+      generateProductVariant({ productId: 25, price: 65 }),
+      generateProductVariant({ productId: 26, price: 89 }),
+      generateProductVariant({ productId: 27, price: 89 }),
+      generateProductVariant({ productId: 28, price: 89 }),
+      generateProductVariant({ productId: 29, price: 45 }),
+      generateProductVariant({ productId: 30, price: 45 }),
+      generateProductVariant({ productId: 31, price: 45 }),
+      generateProductVariant({ productId: 32, price: 45 }),
+      generateProductVariant({ productId: 33, price: 45 }),
+      generateProductVariant({ productId: 34, price: 45 }),
+      generateProductVariant({ productId: 35, price: 45 }),
+      generateProductVariant({ productId: 36, price: 40 }),
+      generateProductVariant({ productId: 37, price: 40 }),
     ],
   });
 
