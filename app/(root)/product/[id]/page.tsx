@@ -1,4 +1,4 @@
-import { Container, Title } from '@/shared/components/shared';
+import { Container, Title } from '@/shared/components/custom';
 import { prisma } from '@/prisma/prisma-client';
 import { notFound } from 'next/navigation';
 

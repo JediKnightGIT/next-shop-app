@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { prisma } from './prisma-client';
 import { hashSync } from 'bcrypt';
-import { categories, ingredients, products } from './constants';
+import { categories, _ingredients, products } from './constants';
 
 const randomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
@@ -49,7 +49,7 @@ async function up() {
   });
 
   await prisma.ingredient.createMany({
-    data: ingredients,
+    data: _ingredients,
   });
 
   await prisma.product.createMany({
@@ -65,9 +65,9 @@ async function up() {
       ],
       categoryId: 1,
       ingredients: {
-        connect: ingredients
+        connect: _ingredients
           .slice(3, 6)
-          .concat(ingredients[7], ingredients[10], ingredients[12]),
+          .concat(_ingredients[7], _ingredients[10], _ingredients[12]),
       },
     },
   });
@@ -81,7 +81,7 @@ async function up() {
       ],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(3, 5).concat(ingredients[11]),
+        connect: _ingredients.slice(3, 5).concat(_ingredients[11]),
       },
     },
   });
@@ -92,7 +92,7 @@ async function up() {
       imageUrls: ['/burgers/big_hit.webp', '/burgers/double_big_hit.webp'],
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(1, 7).concat(ingredients[12]),
+        connect: _ingredients.slice(1, 7).concat(_ingredients[12]),
       },
     },
   });
@@ -107,9 +107,9 @@ async function up() {
       ],
       categoryId: 1,
       ingredients: {
-        connect: ingredients
+        connect: _ingredients
           .slice(1, 6)
-          .concat(ingredients[9], ingredients[12]),
+          .concat(_ingredients[9], _ingredients[12]),
       },
     },
   });
@@ -120,9 +120,9 @@ async function up() {
       imageUrls: ['/burgers/grand.webp', '/burgers/double_grand.webp'],
       categoryId: 1,
       ingredients: {
-        connect: ingredients
+        connect: _ingredients
           .slice(3, 8)
-          .concat(ingredients[10], ingredients[12]),
+          .concat(_ingredients[10], _ingredients[12]),
       },
     },
   });
